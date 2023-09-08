@@ -1,0 +1,142 @@
+{
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "Zeer UI"
+      }
+    },
+    {
+      "path": "pages/base-component/base-component",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/view-component/view-component",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/feedback-component/feedback-component",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/form-component/form-component",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/navigation-component/navigation-component",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/colors/colors",
+      "style": {
+        "navigationBarTitleText": "Color颜色",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/icons/icons",
+      "style": {
+        "navigationBarTitleText": "Icons图标",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/buttons/buttons",
+      "style": {
+        "navigationBarTitleText": "Button按钮",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/toast/toast",
+      "style": {
+        "navigationBarTitleText": "Toast轻提示",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/modal/modal",
+      "style": {
+        "navigationBarTitleText": "Modal模态框",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/actionsheet/actionsheet",
+      "style": {
+        "navigationBarTitleText": "动作面板",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/message/message",
+      "style": {
+        "navigationBarTitleText": "消息通知",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/swiper-action/swiper-action",
+      "style": {
+        "navigationBarTitleText": "滑动操作",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/tabbar/tabbar",
+      "style": {
+        "navigationBarTitleText": "标签栏",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/drawer/drawer",
+      "style": {
+        "navigationBarTitleText": "抽屉",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/navigation-bar/navigation-bar",
+      "style": {
+        "navigationBarTitleText": "导航栏",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/tabs/tabs",
+      "style": {
+        "navigationBarTitleText": "标签页",
+        "enablePullDownRefresh": true
+      }
+    }
+  ],
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "zui-(.*)": "@/components/zeerui/zui-$1/zui-$1.vue"
+    }
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Zeer UI",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
+}
