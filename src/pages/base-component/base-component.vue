@@ -12,6 +12,10 @@ export default {
         {
           text:'colors',
           url:'/pages/case/colors/colors'
+        },
+        {
+          text:'icons',
+          url:'/pages/case/icons/icons'
         }
       ]
     };

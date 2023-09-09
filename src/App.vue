@@ -12,8 +12,9 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 @import "./common/app.css";
+@import "./common/variable.scss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

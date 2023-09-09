@@ -169,12 +169,12 @@
 				const global = uni && uni.$zui && uni.$zui.color;
 				let color = ''
 				const colors = {
-					'primary': (global && global.primary) || '#5677fc',
+					'primary': (global && global.primary) || '#6190E8',
 					'white': '#fff',
-					'danger': (global && global.danger) || '#EB0909',
-					'warning': (global && global.warning) || '#ff7900',
-					'green': (global && global.success) || '#07c160',
-					'blue': (global && global.blue) || '#007aff',
+					'danger': (global && global.danger) || '#FF4949',
+					'warning': (global && global.warning) || '#FFC82C',
+					'green': (global && global.success) || '#13CE66',
+					'blue': (global && global.blue) || '#78A4FA',
 					'gray': '#bfbfbf',
 					'black': '#333333',
 					'brown': '#ac9157',

@@ -1,6 +1,7 @@
 <template>
   <view class="container">
     <view class="slogan flex flex-col justify-center items-center">
+<!--      <image class="w-40 h-40" src="/static/ZeerUI.png"></image>-->
       <image class="w-40 h-40" src="/static/ZeerUI.png"></image>
       <text class="text-lg text-blue-700">{{ title }}</text>
     </view>
@@ -17,7 +18,7 @@
           </view>
         </view>
         <view class="shrink-0 flex items-center justify-center w-10 h-10  bg-sky-600 rounded-full">
-          <zui-icon name="arrowright" color="#FFF"></zui-icon>
+          <zui-icon name="arrow_right" color="#FFF"></zui-icon>
         </view>
       </view>
     </view>
@@ -42,7 +43,7 @@ export default {
         {
           icon: '',
           title: '基础',
-          desc: '包含颜色、文本、图标等',
+          desc: '包含颜色、图标等',
           path: '/pages/base-component/base-component'
         },
         {
