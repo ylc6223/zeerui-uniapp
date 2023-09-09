@@ -5,6 +5,9 @@ page {
     font-size: 32rpx;
     font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
 }
+view {
+    box-sizing: border-box;
+}
 ::-webkit-scrollbar {
     width: 0 !important;
     height: 0 !important;

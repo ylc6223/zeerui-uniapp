@@ -1,6 +1,8 @@
 <template>
   <view class="container">
-<view v-for="(item,idx) in list" :key="idx" @click="handleClick(item.url,$event)">{{item.text}}</view>
+    <zui-list-view title="基础">
+      <zui-list-cell v-for="(item,idx) in list" :key="idx" @click="handleClick(item.url,$event)">{{item.text}}</zui-list-cell>
+    </zui-list-view>
   </view>
 </template>
 
@@ -16,6 +18,10 @@ export default {
         {
           text:'icons',
           url:'/pages/case/icons/icons'
+        },
+        {
+          text:'buttons',
+          url:'/pages/case/buttons/buttons'
         }
       ]
     };

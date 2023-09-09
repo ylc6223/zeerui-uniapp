@@ -15,6 +15,7 @@
 <style lang="scss">
 @import "./common/app.css";
 @import "./common/variable.scss";
+@import "./common/global.scss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

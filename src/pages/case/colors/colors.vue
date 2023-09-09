@@ -1,5 +1,6 @@
 <template>
   <view class="container">
+    <DocsHeader title='Color 颜色'></DocsHeader>
     <view class='doc-body'>
       <view class='panel' v-for="item in colorData" :key="item.type">
         <view class='panel__title text-lg font-bold pl-6 text-blue-500'>{{item.type}}</view>
