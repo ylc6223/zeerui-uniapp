@@ -125,6 +125,27 @@
         "navigationBarTitleText": "标签页",
         "enablePullDownRefresh": true
       }
+    },
+    {
+      "path": "pages/case/badge/badge",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/base-component/tag/tag",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/case/notice-bar/notice-bar",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": true
+      }
     }
   ],
   "easycom": {

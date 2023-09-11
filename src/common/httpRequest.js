@@ -3,13 +3,10 @@
  * @author echo. 
  **/ 
 
-const tui = {
+const zui = {
 	//接口地址
 	interfaceUrl: function() {
-		return 'https://www.thorui.cn'
-		//return 'https://test.thorui.cn'
-		//return 'https://uat.thorui.cn'
-		// return 'https://prod.thorui.cn'
+		return 'https://www.zeerui.cn'
 	},
 	toast: function(text, duration, success) {
 		uni.showToast({
@@ -80,43 +77,43 @@ const tui = {
 	request: async function(url, method, postData, isDelay, isForm, hideLoading) {
 		//接口请求
 		let loadding = false;
-		tui.delayed && uni.hideLoading();
-		clearTimeout(tui.delayed);
-		tui.delayed = null;
+		zui.delayed && uni.hideLoading();
+		clearTimeout(zui.delayed);
+		zui.delayed = null;
 		if (!hideLoading) {
 			if (isDelay) {
-				tui.delayed = setTimeout(() => {
+				zui.delayed = setTimeout(() => {
 					loadding = true
-					tui.showLoading()
+					zui.showLoading()
 				}, 1000)
 			} else {
 				loadding = true
-				tui.showLoading()
+				zui.showLoading()
 			}
 		}
 
 		return new Promise((resolve, reject) => {
 			uni.request({
-				url: tui.interfaceUrl() + url,
+				url: zui.interfaceUrl() + url,
 				data: postData,
 				header: {
 					'content-type': isForm ? 'application/x-www-form-urlencoded' : 'application/json',
-					'Authorization': tui.getToken()
+					'Authorization': zui.getToken()
 				},
 				method: method, //'GET','POST'
 				dataType: 'json',
 				success: (res) => {
-					clearTimeout(tui.delayed)
-					tui.delayed = null;
+					clearTimeout(zui.delayed)
+					zui.delayed = null;
 					if (loadding && !hideLoading) {
 						uni.hideLoading()
 					}
 					resolve(res.data)
 				},
 				fail: (res) => {
-					clearTimeout(tui.delayed)
-					tui.delayed = null;
-					tui.toast("网络不给力，请稍后再试~")
+					clearTimeout(zui.delayed)
+					zui.delayed = null;
+					zui.toast("网络不给力，请稍后再试~")
 					reject(res)
 				}
 			})
@@ -128,14 +125,14 @@ const tui = {
 	 * @param string src 文件路径
 	 */
 	uploadFile: function(url, src) {
-		tui.showLoading()
+		zui.showLoading()
 		return new Promise((resolve, reject) => {
 			const uploadTask = uni.uploadFile({
-				url: tui.interfaceUrl() + url,
+				url: zui.interfaceUrl() + url,
 				filePath: src,
 				name: 'imageFile',
 				header: {
-					'Authorization': tui.getToken()
+					'Authorization': zui.getToken()
 				},
 				formData: {
 					// sizeArrayText:""
@@ -158,32 +155,32 @@ const tui = {
 			})
 		})
 	},
-	tuiJsonp: function(url, callback, callbackname) {
+	zuiJsonp: function(url, callback, callbackname) {
 		// #ifdef H5
 		window[callbackname] = callback;
-		let tuiScript = document.createElement("script");
-		tuiScript.src = url;
-		tuiScript.type = "text/javascript";
-		document.head.appendChild(tuiScript);
-		document.head.removeChild(tuiScript);
+		let zuiScript = document.createElement("script");
+		zuiScript.src = url;
+		zuiScript.type = "text/javascript";
+		document.head.appendChild(zuiScript);
+		document.head.removeChild(zuiScript);
 		// #endif
 	},
 	//设置用户信息
 	setUserInfo: function(mobile, token) {
-		//uni.setStorageSync("thorui_token", token)
-		uni.setStorageSync("thorui_mobile", mobile)
+		//uni.setStorageSync("zeerui_token", token)
+		uni.setStorageSync("zeerui_mobile", mobile)
 	},
 	//获取token
 	getToken() {
-		return uni.getStorageSync("thorui_token")
+		return uni.getStorageSync("zeerui_token")
 	},
 	//判断是否登录
 	isLogin: function() {
-		return uni.getStorageSync("thorui_mobile") ? true : false
+		return uni.getStorageSync("zeerui_mobile") ? true : false
 	},
 	//跳转页面，校验登录状态
 	href(url, isVerify) {
-		if (isVerify && !tui.isLogin()) {
+		if (isVerify && !zui.isLogin()) {
 			uni.navigateTo({
 				url: '/pages/common/login/login'
 			})
@@ -195,4 +192,4 @@ const tui = {
 	}
 }
 
-export default tui
+export default zui

@@ -1,6 +1,20 @@
 /**
  * Default variables
  */
+@mixin line($num: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @if ($num == 1) {
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $num;
+
+    /* autoprefixer: off */
+    -webkit-box-orient: vertical;
+  }
+}
 
 @function tint(
   $color,
@@ -202,14 +216,12 @@ $at-fab-size-sm: 40px * $hd !default;
 $at-fab-icon-size: 24px * $hd !default;
 $at-fab-bg-color: $color-brand;
 $at-fab-bg-color-active: $color-brand-dark;
-$at-fab-box-shadow:
-        0 6px 10px -2px rgba(0, 0, 0, 0.2),
-        0 12px 20px 0 rgba(0, 0, 0, 0.14),
-        0 2px 36px 0 rgba(0, 0, 0, 0.12) !default;
-$at-fab-box-shadow-active:
-        0 14px 16px -8px rgba(0, 0, 0, 0.2),
-        0 24px 34px 4px rgba(0, 0, 0, 0.14),
-        0 10px 44px 8px rgba(0, 0, 0, 0.12) !default;
+$at-fab-box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.2),
+0 12px 20px 0 rgba(0, 0, 0, 0.14),
+0 2px 36px 0 rgba(0, 0, 0, 0.12) !default;
+$at-fab-box-shadow-active: 0 14px 16px -8px rgba(0, 0, 0, 0.2),
+0 24px 34px 4px rgba(0, 0, 0, 0.14),
+0 10px 44px 8px rgba(0, 0, 0, 0.12) !default;
 
 /* Calendar */
 $at-calendar-day-size: 72px !default;

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-// import zuiIcon from '@/components/thorui/zui-icon/zui-icon.vue'
+// import zuiIcon from '@/components/zeerui/zui-icon/zui-icon.vue'
 export default {
   name: 'zuiTabbar',
   emits: ['click'],
