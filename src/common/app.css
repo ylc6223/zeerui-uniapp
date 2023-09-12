@@ -40,6 +40,16 @@ button::after {
     font-size: 32px;
     color: #999;
 }
+.zui-icon-check1:before {
+    content: "\e687";
+}
+
+.zui-icon-close1:before {
+    content: "\e688";
+}
+.zui-icon-notice:before {
+    content: "\e61e";
+}
 .zui-icon-view:before {
     content: "\e633";
 }

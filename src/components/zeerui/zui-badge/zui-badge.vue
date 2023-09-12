@@ -1,129 +1,129 @@
 <template>
-	<view :class="[dot ? 'zui-badge-dot' : 'zui-badge', !dot ? 'zui-badge-scale' : '']"
-		:style="{ top: top, right: right, position: absolute ? 'absolute' : 'static', transform: getStyle, margin: margin,background:getBackground,color:getColor }"
-		@tap="handleClick">
-		<slot></slot>
-	</view>
+  <view :class="[dot ? 'zui-badge-dot' : 'zui-badge', !dot ? 'zui-badge-scale' : '']"
+        :style="{ top: top, right: right, position: absolute ? 'absolute' : 'static', transform: getStyle, margin: margin,background:getBackground,color:getColor }"
+        @tap="handleClick">
+    <slot></slot>
+  </view>
 </template>
 
 <script>
-	export default {
-		name: 'zuiBadge',
-		emits: ['click'],
-		props: {
-			//primary,warning,green,danger,white，black，gray,white_red
-			type: {
-				type: String,
-				default: 'primary'
-			},
-			//是否是圆点
-			dot: {
-				type: Boolean,
-				default: false
-			},
-			margin: {
-				type: String,
-				default: '0'
-			},
-			//是否绝对定位
-			absolute: {
-				type: Boolean,
-				default: false
-			},
-			top: {
-				type: String,
-				default: '-8rpx'
-			},
-			right: {
-				type: String,
-				default: '0'
-			},
-			//缩放比例
-			scaleRatio: {
-				type: Number,
-				default: 1
-			},
-			//水平方向移动距离
-			translateX: {
-				type: String,
-				default: '0'
-			}
-		},
-		computed: {
-			getStyle() {
-				return `scale(${this.scaleRatio}) translateX(${this.translateX})`;
-			},
-			getBackground() {
-				const global = uni && uni.$zui && uni.$zui.color;
-				let color = {
-					'primary': (global && global.primary) || '#5677fc',
-					'green': (global && global.success) || '#07c160',
-					'warning': (global && global.warning) || '#ff7900',
-					'danger': (global && global.danger) || '#EB0909',
-					'white': '#fff',
-					'black': '#000',
-					'gray': '#ededed',
-					'red': (global && global.pink) || '#f74d54',
-					'pink': (global && global.pink) || '#f74d54',
-					'white_red': '#fff',
-					'white_primary': '#fff',
-					'white_green': '#fff',
-					'white_warning': '#fff',
-					'white_pink': '#fff'
-				} [this.type]
-				return color
-			},
-			getColor() {
-				const global = uni && uni.$zui && uni.$zui.color;
-				let color = {
-					'primary': '#fff',
-					'green': '#fff',
-					'warning': '#fff',
-					'danger': '#fff',
-					'white': '#333',
-					'black': '#fff',
-					'gray': '#999',
-					'red': '#fff',
-					'pink': (global && global.pink) || '#f74d54',
-					'white_red': (global && global.danger) || '#EB0909',
-					'white_primary': (global && global.primary) || '#5677fc',
-					'white_green': (global && global.success) || '#07c160',
-					'white_warning': (global && global.warning) || '#ff7900',
-					'white_pink': (global && global.pink) || '#f74d54',
-				} [this.type]
-				return color
-			}
-		},
-		methods: {
-			handleClick() {
-				this.$emit('click', {});
-			}
-		}
-	};
+export default {
+  name: 'zuiBadge',
+  emits: ['click'],
+  props: {
+    //primary,warning,green,danger,white，black，gray,white_red
+    type: {
+      type: String,
+      default: 'primary'
+    },
+    //是否是圆点
+    dot: {
+      type: Boolean,
+      default: false
+    },
+    margin: {
+      type: String,
+      default: '0'
+    },
+    //是否绝对定位
+    absolute: {
+      type: Boolean,
+      default: false
+    },
+    top: {
+      type: String,
+      default: '-8rpx'
+    },
+    right: {
+      type: String,
+      default: '0'
+    },
+    //缩放比例
+    scaleRatio: {
+      type: Number,
+      default: 1
+    },
+    //水平方向移动距离
+    translateX: {
+      type: String,
+      default: '0'
+    }
+  },
+  computed: {
+    getStyle() {
+      return `scale(${this.scaleRatio}) translateX(${this.translateX})`;
+    },
+    getBackground() {
+      const global = uni && uni.$zui && uni.$zui.color;
+      let color = {
+        'primary': (global && global.primary) || '#6190E8',
+        'green': (global && global.success) || '#13CE66',
+        'warning': (global && global.warning) || '#FFC82C',
+        'danger': (global && global.danger) || '#FF4949',
+        'white': '#fff',
+        'black': '#000',
+        'gray': '#ededed',
+        'red': (global && global.pink) || '#f74d54',
+        'pink': (global && global.pink) || '#f74d54',
+        'white_red': '#fff',
+        'white_primary': '#fff',
+        'white_green': '#fff',
+        'white_warning': '#fff',
+        'white_pink': '#fff'
+      } [this.type]
+      return color
+    },
+    getColor() {
+      const global = uni && uni.$zui && uni.$zui.color;
+      let color = {
+        'primary': '#fff',
+        'green': '#fff',
+        'warning': '#fff',
+        'danger': '#fff',
+        'white': '#333',
+        'black': '#fff',
+        'gray': '#999',
+        'red': '#fff',
+        'pink': (global && global.pink) || '#f74d54',
+        'white_red': (global && global.danger) || '#EB0909',
+        'white_primary': (global && global.primary) || '#5677fc',
+        'white_green': (global && global.success) || '#07c160',
+        'white_warning': (global && global.warning) || '#ff7900',
+        'white_pink': (global && global.pink) || '#f74d54',
+      } [this.type]
+      return color
+    }
+  },
+  methods: {
+    handleClick() {
+      this.$emit('click', {});
+    }
+  }
+};
 </script>
 
 <style scoped>
-	.zui-badge-dot {
-		height: 8px;
-		width: 8px;
-		border-radius: 50%;
-	}
+.zui-badge-dot {
+  height: 8Px;
+  width: 8Px;
+  border-radius: 50%;
+}
 
-	.zui-badge {
-		font-size: 24rpx;
-		line-height: 24rpx;
-		height: 36rpx;
-		min-width: 36rpx;
-		padding: 0 10rpx;
-		box-sizing: border-box;
-		border-radius: 100rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 10;
-	}
+.zui-badge {
+  font-size: 24rpx;
+  line-height: 24rpx;
+  height: 36rpx;
+  min-width: 36rpx;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  border-radius: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
 
-	.zui-badge-scale {
-		transform-origin: center center;
-	}
+.zui-badge-scale {
+  transform-origin: center center;
+}
 </style>

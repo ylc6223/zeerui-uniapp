@@ -1,51 +1,47 @@
 <template>
   <view
       v-if="show"
-      :class="rootClasses"
+      class="zui-noticebar"
+      :class="{
+        'zui-noticebar--marquee': marquee,
+        'zui-noticebar--weapp': marquee && (isWEAPP || isALIPAY),
+        'zui-noticebar--single': !marquee && single
+      }"
+      :style="customStyle"
   >
-    <!-- close icon -->
     <view
-        v-if="close_"
-        class="at-noticebar__close"
-        @tap="onClose"
+        v-if="close"
+        class='zui-noticebar__close'
+        @click="onClose"
     >
-      <text class="at-icon at-icon-close" />
+      <text class='zui-icon zui-icon-close1'></text>
     </view>
-
-    <!-- content -->
-    <view class="at-noticebar__content">
-      <!-- icon -->
-      <view
-          v-if="icon"
-          class="at-noticebar__content-icon"
-      >
-        <text :class="iconClasses" />
+    <view class='zui-noticebar__content'>
+      <view v-if="icon" class='zui-noticebar__content-icon'>
+        <text class="zui-icon" :class="['zui-icon-'+icon]"></text>
       </view>
-
-      <!-- text -->
-      <view class="at-noticebar__content-text">
-        <!-- default content slot -->
+      <view class='zui-noticebar__content-text'>
         <view
-            :id="animationElId"
+            :id="animElemId"
             :animation="animationData"
-            :class="innerContentClasses"
-            :style="animationStyle"
+            class="zui-noticebar__content-inner"
+            :class="{animElemId:marquee}"
+            :style="{
+              'animation-duration':marquee?dura+'s':'0s'
+            }"
         >
-          <slot />
+          <slot></slot>
         </view>
-
-        <!-- show more content -->
-        <view
-            v-if="showMore_"
-            class="at-noticebar__more"
-            @tap="onGotoMore"
-        >
-          <text class="text">{{ moreText }}</text>
-
-          <view class="at-noticebar__more-icon">
-            <text class="at-icon at-icon-chevron-right" />
-          </view>
-        </view>
+      </view>
+    </view>
+    <view
+        v-if="showMORE"
+        class='zui-noticebar__more'
+        @click="onGotoMore"
+    >
+      <text class='text'>{{ moreText }}</text>
+      <view class='zui-noticebar__more-icon'>
+        <text class='zui-icon zui-icon-chevron-right'></text>
       </view>
     </view>
   </view>
@@ -64,10 +60,6 @@ export default {
       type: Boolean,
       default: false
     },
-    showMore: {
-      type: Boolean,
-      default: false
-    },
     marquee: {
       type: Boolean,
       default: false
@@ -80,136 +72,108 @@ export default {
       type: String,
       default: '查看详情'
     },
+    showMore: {
+      type: Boolean,
+      default: false
+    },
     icon: {
       type: String,
-      default: ''
+      default: 'notice'
+    },
+    customStyle: {
+      type: Object,
+      default: () => ({})
     },
   },
   data() {
     return {
       timeout: null,
       interval: null,
-      dura: 15,
       show: true,
-      close_: this.marquee ? false : this.close,
-      showMore_: !this.single ? false : this.showMore,
-      animationElId: `J_${Math.ceil(Math.random() * 10e5).toString(36)}`,
+      colse: true,
+      animElemId: `J_${Math.ceil(Math.random() * 10e5).toString(36)}`,
       animationData: {
         actions: [{}]
       },
+      dura: 15,
       isWEAPP: uni.getSystemInfoSync().platform === 'weapp',
       isALIPAY: uni.getSystemInfoSync().platform === 'alipay',
       isWEB: uni.getSystemInfoSync().platform === 'web',
     }
   },
   computed: {
-    rootClasses() {
-      return {
-        'at-noticebar': true,
-        'at-noticebar--marquee': this.marquee,
-        'at-noticebar--weapp': this.marquee && (!this.isWEB),
-        'at-noticebar--single': !this.marquee && this.single
-
-      }
+    showMORE() {
+      return this.single
     },
-    iconClasses() {
-      return {
-        'at-noticebar__content-inner': true,
-        [`${this.animationElId}`]: this.marquee
-      }
-    }
-    ,
-    innerContentClasses() {
-      return {
-        'at-icon': true,
-        [`at-icon-${this.icon}`]: Boolean(this.icon)
-      }
-    }
-    ,
-    animationStyle() {
-      const style = {};
-      if (this.marquee) {
-        style['animation-duration'] = `${this.dura}s`;
-        style['-webkit-animation-duration'] = `${this.dura}s`;
-      }
-      return style;
-    }
-    ,
   },
   methods: {
-    onClose(event) {
+    onClose(e) {
       this.show = false;
-      this.$emit('close', event);
+      this.$emit('close', e);
     },
-    onGotoMore(event) {
-      this.$emit('goto-more', event);
-    },
-    initWebAnimation() {
-      const self = this
-      const elem = document.querySelector(`.${self.animationElId}`)
-
-      if (!elem) return
-
-      const width = elem.getBoundingClientRect().width
-      self.dura = width / +self.speed
-    },
-    initMiniAppAnimation() {
-      const self = this
-      const query = uni.createSelectorQuery()
-      query
-          .select(`.${self.animationElId}`)
-          .boundingClientRect()
-          .exec(res => {
-            const queryRes = res[0]
-            if (!queryRes) return
-
-            const {width} = queryRes
-            const dura = width / +self.speed
-
-            const animation = uni.createAnimation({
-              duration: dura * 1000,
-            })
-
-            const resetAnimation = uni.createAnimation({
-              duration: 0,
-            })
-
-            const resetOpacityAnimation = uni.createAnimation({
-              duration: 0,
-            })
-
-            const animateBody = () => {
-              resetOpacityAnimation.opacity(0).step()
-              self.animationData = resetOpacityAnimation.export()
-
-              setTimeout(() => {
-                resetAnimation.translateX(0).step()
-                self.animationData = resetAnimation.export()
-              }, 300)
-
-              setTimeout(() => {
-                resetOpacityAnimation.opacity(1).step()
-                self.animationData = resetOpacityAnimation.export()
-              }, 600)
-
-              setTimeout(() => {
-                animation.translateX(-width).step()
-                self.animationData = animation.export()
-              }, 900)
-            }
-
-            animateBody()
-            self.interval = setInterval(animateBody, dura * 1000 + 1000)
-          })
+    onGotoMore(e) {
+      this.$emit('goto-more', e);
     },
     initAnimation() {
       const self = this
-      self.timeout = setTimeout(() => {
+      const isWEAPP = this.isWEAPP
+      const isALIPAY = this.isALIPAY
+      this.timeout = setTimeout(() => {
         self.timeout = null
+        if (self.isWEB) {
+          const speed = self.speed
+          const elem = document.querySelector(`.${self.animElemId}`)
+          if (!elem) return
+          const width = elem.getBoundingClientRect().width
+          const dura = width / +speed
+          self.dura = dura
+        } else if (isWEAPP || isALIPAY) {
+          const query = uni.createSelectorQuery()
+          query
+              .select(`.${self.animElemId}`)
+              .boundingClientRect()
+              .exec(res => {
+                const queryRes = res[0]
+                if (!queryRes) return
+                const {width} = queryRes
+                const speed = self.speed
+                const dura = width / +speed
+                const animation = uni.createAnimation({
+                  duration: dura * 1000,
+                  timingFunction: 'linear'
+                })
+                const resetAnimation = uni.createAnimation({
+                  duration: 0,
+                  timingFunction: 'linear'
+                })
+                const resetOpacityAnimation = uni.createAnimation({
+                  duration: 0,
+                  timingFunction: 'linear'
+                })
+                const animBody = () => {
+                  resetOpacityAnimation.opacity(0).step()
+                  self.animationData = resetOpacityAnimation.export()
 
-        if (self.isWEB) self.initWebAnimation()
-        else self.initMiniAppAnimation()
-      }, 100)
+                  setTimeout(() => {
+                    resetAnimation.translateX(0).step()
+                    self.animationData = resetAnimation.export()
+                  }, 300)
+
+                  setTimeout(() => {
+                    resetOpacityAnimation.opacity(1).step()
+                    self.animationData = resetOpacityAnimation.export()
+                  }, 600)
+
+                  setTimeout(() => {
+                    animation.translateX(-width).step()
+                    self.animationData = animation.export()
+                  }, 900)
+                }
+                animBody()
+                self.interval = setInterval(animBody, dura * 1000 + 1000)
+              })
+        }
+      }, 1000)
     }
   },
   watch: {
@@ -222,6 +186,11 @@ export default {
       },
       deep: true,
     },
+    marquee(newVal, oldVal) {
+      if (newVal) {
+        this.close = false
+      }
+    }
   },
   mounted() {
     if (!this.marquee) return
@@ -231,27 +200,139 @@ export default {
 </script>
 
 <style scoped lang="scss">
-//@import "../../../common/variable.scss";
+@import "../../../common/variable.scss";
 
-.panel__content {
-  .bar-item {
-    margin-bottom: 20px;
+.zui-noticebar {
+  position: relative;
+  padding: $spacing-v-sm $spacing-h-lg;
+  color: $at-noticebar-text-color;
+  font-size: 0;
+  background: $at-noticebar-bg-color;
 
-    &:last-child {
-      margin-bottom: 0;
+  /* elements */
+  &__content {
+    line-height: $line-height-zh;
+    word-break: break-all;
+    word-wrap: break-word;
+
+    &-icon {
+      display: inline-block;
+      margin-right: 12px;
+      vertical-align: top;
+
+      .zui-icon {
+        font-size: $at-noticebar-icon-size;
+        line-height: $at-noticebar-font-size * 1.5;
+      }
+    }
+
+    &-text {
+      display: inline;
+      font-size: $at-noticebar-font-size;
+    }
+
+    &-inner {
+      display: inline;
     }
   }
-}
 
-.at-noticebar {
-  position: relative;
-  //padding: $spacing-v-sm $spacing-h-lg;
-  padding: 12px 24px;
-  //color: $at-noticebar-text-color;
-  color: #DE8C17;
-  font-size: 0;
-  //background: $at-noticebar-bg-color;
-  background: #FCF6ED;
+  &__close {
+    position: absolute;
+    top: 50%;
+    left: $spacing-h-lg;
+    width: $at-noticebar-btn-close-size;
+    height: $at-noticebar-btn-close-size;
+    transform: translate3d(0, -50%, 0);
+
+    .zui-icon {
+      color: $at-noticebar-btn-close-color;
+      font-size: $at-noticebar-btn-close-size;
+    }
+
+    + .zui-noticebar__content {
+      margin-left: 50px;
+    }
+  }
+
+  &__more {
+    color: $color-grey-2;
+    font-size: 0;
+
+    .text {
+      font-size: $at-noticebar-font-size;
+      line-height: $line-height-zh;
+      vertical-align: middle;
+    }
+
+    &-icon {
+      display: inline-block;
+      width: $at-noticebar-font-size;
+      vertical-align: middle;
+      overflow: hidden;
+
+      .zui-icon {
+        font-size: $at-noticebar-font-size;
+      }
+    }
+  }
+
+  /* modifiers */
+  &--single {
+    display: flex;
+    justify-content: space-between;
+
+    .zui-noticebar__content {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+
+      &-text {
+        display: flex;
+        overflow: hidden;
+      }
+
+      &-inner {
+        flex: 1;
+        @include line(1);
+      }
+    }
+  }
+
+  &--marquee {
+    .zui-noticebar__content {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      overflow: hidden;
+
+      &-text {
+        flex: 1;
+        overflow: hidden;
+      }
+
+      &-inner {
+        display: inline-block;
+        white-space: nowrap;
+        padding-left: 100%;
+        height: $at-noticebar-font-size * 1.5;
+        animation: marquee 1s linear infinite both;
+        transform: translateZ(0);
+      }
+    }
+  }
+
+  &--more {
+    .zui-noticebar__content {
+      max-width: 525px;
+    }
+  }
+
+  &--weapp {
+    .zui-noticebar__content-inner {
+      animation: none;
+    }
+  }
 }
 
 @keyframes marquee {

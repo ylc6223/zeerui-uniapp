@@ -17,7 +17,7 @@ export default {
         },
         {
           text:'Badge',
-          url:'/pages/case/icons/icons'
+          url:'/pages/case/badge/badge'
         },
         {
           text:'Tag',
