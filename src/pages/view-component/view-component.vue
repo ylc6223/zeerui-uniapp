@@ -21,7 +21,7 @@ export default {
         },
         {
           text:'Tag',
-          url:'/pages/case/buttons/buttons'
+          url:'/pages/case/tags/tags'
         }
       ]
     };
