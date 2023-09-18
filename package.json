@@ -46,7 +46,11 @@
     "test:h5": "cross-env UNI_PLATFORM=h5 jest -i",
     "test:ios": "cross-env UNI_PLATFORM=app-plus UNI_OS_NAME=ios jest -i",
     "test:mp-baidu": "cross-env UNI_PLATFORM=mp-baidu jest -i",
-    "test:mp-weixin": "cross-env UNI_PLATFORM=mp-weixin jest -i"
+    "test:mp-weixin": "cross-env UNI_PLATFORM=mp-weixin jest -i",
+    "build:lib": "node build/index.js lib",
+    "build:npm": "node build/index.js npm",
+    "build:release": "node build/index.js release",
+    "build:readme": "node build/index.js readme"
   },
   "dependencies": {
     "@dcloudio/uni-app": "2.0.2-3081220230817001",
