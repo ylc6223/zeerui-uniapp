@@ -21,15 +21,15 @@ export default {
         },
         {
           text:'Message',
-          url:'/pages/case/buttons/buttons'
+          url:'/pages/case/message/message'
         },
         {
           text:'Action-Sheet',
-          url:'/pages/case/buttons/buttons'
+          url:'/pages/case/actionsheet/actionsheet'
         },
         {
           text:'Swipe-Action',
-          url:'/pages/case/buttons/buttons'
+          url:'/pages/case/swiper-action/swiper-action'
         }
       ]
     };

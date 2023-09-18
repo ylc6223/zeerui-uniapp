@@ -1,0 +1,36 @@
+{
+  "name": "zeer-uni",
+  "private": false,
+  "version": "1.0.0",
+  "description": "ZeerUI Component library",
+  "main": "index.js",
+  "scripts": {
+    "test": "thorui-uni"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dingyong0214/ThorUI-uniapp.git"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "browserslist": [
+    "Android >= 4",
+    "ios >= 8"
+  ],
+  "keywords": [
+    "zeerui",
+    "zeerui组件库",
+    "uni-app component"
+  ],
+  "author": {
+    "name": "echo.",
+    "email": "260902108@qq.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dingyong0214/ThorUI-uniapp/issues"
+  },
+  "homepage": "https://github.com/dingyong0214/ThorUI-uniapp#readme",
