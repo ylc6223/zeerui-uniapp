@@ -1,11 +1,11 @@
 {
-  "name": "zeer-uni",
+  "name": "zeerui-uni",
   "private": false,
   "version": "1.0.0",
   "description": "ZeerUI Component library",
   "main": "index.js",
   "scripts": {
-    "test": "thorui-uni"
+    "test": "zeerui-uni"
   },
   "publishConfig": {
     "access": "public"
